@@ -1,4 +1,4 @@
-# tmdb_project
+# TMDB_Project
 
 > A project made using the TMDB's API with Vue
 

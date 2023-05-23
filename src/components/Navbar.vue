@@ -1,77 +1,158 @@
 <!--      /-/-/-/-/-/ TEMPLATE BELOW  /-/-/-/-/-/      -->
 <template>
   <div class="navbar">
-    <div>
-      <b-navbar toggleable="lg" type="dark">
-        <b-navbar-brand href="#"
-          ><a href="#"
-            ><img
-              id="nav-logo"
-              src="../assets/new-logo-huggy-dark.svg"
-              alt=""/></a
-        ></b-navbar-brand>
+    <b-navbar toggleable="lg" type="dark">
+      <b-navbar-brand href="#"
+        ><a href="#" id="nav-logo"
+          ><img src="../assets/new-logo-huggy-dark.svg" alt=""/></a
+      ></b-navbar-brand>
 
-        <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-        <b-collapse id="nav-collapse" is-nav>
-          <!-- Right aligned nav items -->
-          <b-navbar-nav class="ml-auto">
-            <b-navbar-nav class="d-flex align-items-center"
-              ><div>
-                <b-dropdown id="dropdown-1" text="Categorias" class="m-md-2">
-                </b-dropdown>
-              </div>
-              <b-nav-item href=#>Cadastre-se</b-nav-item>
-            </b-navbar-nav>
+      <b-collapse id="nav-collapse" is-nav>
+        <!-- Right aligned nav items -->
+        <b-navbar-nav class="ml-auto">
+          <b-navbar-nav class="d-flex align-items-center"
+            ><div>
+              <b-dropdown variant="outline-danger" id="dropdown-1" text="Categorias" class="m-md-2">
+              </b-dropdown>
+            </div>
+            <b-nav-item href="#"
+              ><b-button variant="danger" class="prim-btn" v-b-modal.login-modal
+                >Fazer Login</b-button
+              ></b-nav-item
+            >
           </b-navbar-nav>
-        </b-collapse>
-      </b-navbar>
-    </div>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
+
+    <!--      /-/-/-/-/-/  LOGIN BELOW  /-/-/-/-/-/      -->
+    <b-modal id="login-modal" hide-footer title="Login">
+      <div>
+        <b-form>
+          <label for="form-input-name" required>E-mail:</label>
+          <b-form-input
+            id="form-input-name"
+            class="mb-2 mr-sm-2 mb-sm-0"
+          ></b-form-input>
+          <br />
+          <label for="form-input-password">Senha</label>
+          <b-input-group class="mb-2 mr-sm-2 mb-sm-0">
+            <b-form-input
+              type="password"
+              name="password"
+              minlength="8"
+              required
+              id="form-input-password"
+            ></b-form-input> </b-input-group
+          ><br />
+
+          <b-form-checkbox
+            type="submit"
+            class="text-center mb-2 mr-sm-2 mb-sm-0"
+            >Remember me</b-form-checkbox
+          ><br />
+          <a class="float-right mb-2 mr-sm-2 mb-sm-0" href=""
+            >Esqueci minha senha</a
+          >
+          <br />
+          <br />
+          <div class="text-center float-right">
+            <b-button variant="info">Login</b-button>
+            <b-button variant="secondary" v-b-modal.register-modal
+              >Cadastrar</b-button
+            >
+          </div>
+        </b-form>
+      </div>
+    </b-modal>
+
+    <!--      /-/-/-/-/-/  REGISTER BELOW  /-/-/-/-/-/      -->
+    <b-modal id="register-modal" hide-footer title="Registrar">
+      <div>
+        <b-form>
+          <label for="form-input-name" required>Nome</label>
+          <b-form-input
+            id="form-input-name"
+            class="mb-2 mr-sm-2 mb-sm-0"
+          ></b-form-input>
+          <br />
+          <label for="form-input-name" required>E-mail</label>
+          <b-form-input
+            id="form-input-name"
+            class="mb-2 mr-sm-2 mb-sm-0"
+          ></b-form-input>
+          <br />
+          <label for="form-input-name" required>Confirmar E-mail</label>
+          <b-form-input
+            id="form-input-name"
+            class="mb-2 mr-sm-2 mb-sm-0"
+          ></b-form-input>
+          <br />
+          <label for="form-input-name" required>Senha</label>
+
+          <b-form-input
+            type="password"
+            name="password"
+            minlength="8"
+            required
+            id="form-input-password"
+          ></b-form-input>
+          <br />
+          <label for="form-input-conf-password" required>Confirmar Senha</label>
+          <b-input-group class="mb-2 mr-sm-2 mb-sm-0">
+            <b-form-input
+              type="password"
+              name="password"
+              minlength="8"
+              required
+              id="form-input-conf-password"
+            ></b-form-input> </b-input-group
+          ><br />
+          <div class="text-center float-right">
+            <b-button variant="info" v-b-modal.register-modal
+              >Cadastrar</b-button
+            >
+          </div>
+        </b-form>
+      </div>
+    </b-modal>
   </div>
 </template>
 <!--      /-/-/-/-/-/ SCRIPT BELOW  /-/-/-/-/-/      -->
-<script>
-import axios from "axios";
-export default {
-  name: "search",
-  data() {
-    return {
-      query: "",
-      results: ""
-    };
-  },
-  methods: {
-    getResult(query) {
-      axios
-        .get(
-          "https://api.themoviedb.org/3/search/movie?api_key=4980d7e82610cbc5e6ce236f3a8d508c&query=" +
-            query
-        )
-        .then(response => {
-          this.results = response.data.results;
-        });
-      console.log(this.results);
-    }
-  }
-};
-</script>
+<script></script>
 <!--      /-/-/-/-/-/ STYLE BELOW  /-/-/-/-/-/      -->
 <style>
 template {
   margin: 0;
 }
 .navbar {
-  width: 100vw;
-  padding: 0.45rem;
-  display: flex;
-  flex-direction: row;
   background-color: #263645;
+  width: 100vw;
+}
+#nav-logo {
+  margin-left: 20%;
+}
+.prim-btn {
+  border-radius: 20px;
+  color: #fff !important;
+  padding: 0.5em 1.071em;
+  font-weight: 400;
+  transition: all 200ms;
+}
+.prim-btn:hover {
+  background-color: #c3115a;
+  border-color: #c3115a;
 }
 #nav-collapse {
   margin: 0 8rem 0 8rem;
 }
-.b-navbar-brand {
-  margin-left: 10%;
+/* --      /-/-/-/-/-/ MOBILE MODIFICATIONS BELOW  /-/-/-/-/-/      */
+@media (max-width: 708px) {
+  #nav-logo {
+    margin: 0;
+  }
 }
 </style>
 <!--      /-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/-/      -->

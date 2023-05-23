@@ -1,17 +1,29 @@
 <template>
   <div id="app">
     <Navbar/>
-    <ShowMovies />
+    <Search />
+    <Populares />
+    <MaisVotados />
+    <Detalhes/>
   </div>
 </template>
+
 <script>
-import ShowMovies from "./components/ShowMovies";
+
+import Populares from './components/Populares.vue'
+import Search from "./components/Search";
 import Navbar from './components/Navbar';
+import Detalhes from './components/Detalhes.vue'
+import MaisVotados from './components/MaisVotados.vue'
+
 export default {
   name: "App",
   components: {
     Navbar,
-    ShowMovies
+    Search,
+    Populares,
+    MaisVotados,
+    Detalhes
   }
 };
 </script>
