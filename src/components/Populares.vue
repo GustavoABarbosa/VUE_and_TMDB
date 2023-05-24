@@ -1,5 +1,5 @@
 <template>
-  <div class="carousel">
+  <section class="carousel">
     <div class="card-carousel-wrapper">
       <div
         class="card-carousel--navleft"
@@ -17,17 +17,19 @@
               class="card-carousel--card"
               v-for="movie in movies"
               :key="movie.id"
+              @click="openMovieDetails(movie)"
             >
               <img
                 class="carousel-img"
-                v-bind:src="
-                  'http://image.tmdb.org/t/p/w500/' + movie.poster_path
-                "
+                :src="'http://image.tmdb.org/t/p/w500/' + movie.poster_path"
                 alt="Card Image"
               />
               <div class="card-carousel--card--footer">
                 <h3 class="movie-title">{{ movie.title }}</h3>
-                <!-- <p>{{ movie.overview }}</p>      //   PROPRIEDADE DA SINOPSE -->
+                <p class="rate">
+                  <i class="fa-solid fa-star"></i>
+                  {{ movie.vote_average }}
+                </p>
               </div>
             </div>
           </div>
@@ -39,8 +41,9 @@
         :disabled="atEndOfList"
       ></div>
     </div>
-  </div>
+  </section>
 </template>
+
 <script>
 import axios from "axios";
 export default {
@@ -49,16 +52,37 @@ export default {
       movies: [],
       windowSize: 4,
       currentOffset: 0,
-      paginationFactor: 450
+      paginationFactor: 450,
     };
   },
   methods: {
+    async fetchMovies() {
+      try {
+        const response = await axios.get(
+          "https://api.themoviedb.org/3/movie/popular",
+          {
+            params: { language: "pt-BR", page: "1" },
+            headers: {
+              Authorization:
+                "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0OTgwZDdlODI2MTBjYmM1ZTZjZTIzNmYzYThkNTA4YyIsInN1YiI6IjY0NjdlYzQ4MzNhMzc2MDBlNjdhMDJmMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJ9.e3UIRvWV48uM21mm5tTewjH6aMTZ83AR5gB7hew_qGw"
+            }
+          }
+        );
+        this.movies = response.data.results;
+        console.log(this.movies);
+      } catch (error) {
+        console.log(error);
+      }
+    },
     moveCarousel(direction) {
       if (direction === 1 && !this.atEndOfList) {
         this.currentOffset -= this.paginationFactor;
       } else if (direction === -1 && !this.atHeadOfList) {
         this.currentOffset += this.paginationFactor;
       }
+    },
+    openMovieDetails(movie){
+      this.$emit('open-movie-details', movie)
     }
   },
   computed: {
@@ -73,41 +97,27 @@ export default {
     }
   },
   mounted() {
-    const options = {
-      method: "GET",
-      url: "https://api.themoviedb.org/3/movie/popular",
-      params: { language: "pt-BR", page: "1" },
-      headers: {
-        accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0OTgwZDdlODI2MTBjYmM1ZTZjZTIzNmYzYThkNTA4YyIsInN1YiI6IjY0NjdlYzQ4MzNhMzc2MDBlNjdhMDJmMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.KgzWulpj53NgRmKU8A1pQ_PZ-uQS30NvOIitm7I4B9E"
-      }
-    };
-
-    axios
-      .request(options)
-      .then(response => {
-        this.movies = response.data.results;
-        console.log(response.data.results);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    this.fetchMovies();
   }
 };
 </script>
+
 <style scoped>
 .carousel {
   margin: 20px 0 40px;
+  background-color: #2c3e50;
   color: #666a73;
+  height: 70vh;
+  margin-bottom: 0;
+  padding: 0;
 }
 
 .card-carousel-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 20px 0 40px;
-  color: #666a73;
+  padding: 2rem 0;
+  color: #ff0068;
 }
 
 .card-carousel {
@@ -116,7 +126,7 @@ export default {
   width: 80vw;
 }
 .carousel-img {
-  width: 400px;
+  width: 350px;
   position: relative;
 }
 
@@ -134,8 +144,8 @@ export default {
   width: 15px;
   height: 15px;
   padding: 10px;
-  border-top: 2px solid #42b883;
-  border-right: 2px solid #42b883;
+  border-top: 2px solid #ff0068;
+  border-right: 2px solid #ff0068;
   cursor: pointer;
   margin: 0 20px;
   transition: transform 150ms linear;

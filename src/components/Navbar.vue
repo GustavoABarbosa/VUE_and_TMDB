@@ -1,6 +1,6 @@
 <!--      /-/-/-/-/-/ TEMPLATE BELOW  /-/-/-/-/-/      -->
 <template>
-  <div class="navbar">
+  <nav class="navbar">
     <b-navbar toggleable="lg" type="dark">
       <b-navbar-brand href="#"
         ><a href="#" id="nav-logo"
@@ -51,7 +51,7 @@
           <b-form-checkbox
             type="submit"
             class="text-center mb-2 mr-sm-2 mb-sm-0"
-            >Remember me</b-form-checkbox
+            >Lembrar Login</b-form-checkbox
           ><br />
           <a class="float-right mb-2 mr-sm-2 mb-sm-0" href=""
             >Esqueci minha senha</a
@@ -118,18 +118,16 @@
         </b-form>
       </div>
     </b-modal>
-  </div>
+  </nav>
 </template>
 <!--      /-/-/-/-/-/ SCRIPT BELOW  /-/-/-/-/-/      -->
 <script></script>
 <!--      /-/-/-/-/-/ STYLE BELOW  /-/-/-/-/-/      -->
 <style>
-template {
-  margin: 0;
-}
 .navbar {
   background-color: #263645;
-  width: 100vw;
+  width: 100%;
+  margin:0;
 }
 #nav-logo {
   margin-left: 20%;

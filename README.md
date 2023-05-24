@@ -18,7 +18,7 @@ Projeto criado como teste prático para uma vaga de Frontend Junior.<br><br>Foi 
 <br>
 
 <p align="center">
-  <img alt="projeto Portfolio" src="./src/assets/Captura_commit_22-05-2023.png" width="100%">
+  <img alt="projeto Portfolio" src="./src/assets/Captura_commit_23-05-2023.png" width="100%">
 </p>
 
 ## 🚀 Tecnologias

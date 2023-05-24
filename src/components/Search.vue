@@ -4,11 +4,11 @@
     <div class="search-form">
       <b-form>
         <br />
-        <b-input-group :prepend="prependText" v-if="showPrepend">
+        <b-input-group>
           <b-form-input
             id="search-movie"
             label="Pesquisar filme"
-            placeholder="Seu filme favorito aqui!"
+            placeholder="Procurar filme"
             label-size="lg"
             class="mb-2 mr-sm-2 mb-sm-0"
             type="text"
@@ -16,17 +16,6 @@
             @keyup="getResult(query)"
           />
         </b-input-group>
-        <b-form-input
-          id="search-movie"
-          label="Pesquisar filme"
-          placeholder="Pesquisar"
-          label-size="lg"
-          class="mb-2 mr-sm-2 mb-sm-0"
-          type="text"
-          v-model="query"
-          @keyup="getResult(query)"
-          v-else
-        />
       </b-form>
     </div>
     <b-container>
@@ -36,6 +25,7 @@
           class="movie-card d-flex flex-column m-2"
           v-for="result in results"
           :key="result.id"
+          @click="openMovieDetails(movie)"
         >
           <img
             v-bind:src="'http://image.tmdb.org/t/p/w500/' + result.poster_path"
@@ -58,17 +48,8 @@ export default {
   data() {
     return {
       query: "",
-      results: [],
-      prependText: "Pesquisar",
-      showPrepend: true
+      results: []
     };
-  },
-  mounted() {
-    this.updatePrependVisibility();
-    window.addEventListener("resize", this.updatePrependVisibility);
-  },
-  beforeDestroy() {
-    window.removeEventListener("resize", this.updatePrependVisibility);
   },
   methods: {
     getResult() {
@@ -83,8 +64,8 @@ export default {
           console.error(error);
         });
     },
-    updatePrependVisibility() {
-      this.showPrepend = window.innerWidth >= 708;
+    openMovieDetails(movie){
+      this.$emit('open-movie-details', movie);
     },
     showInfo(query) {
       this.query = query;
@@ -97,7 +78,10 @@ export default {
 <!--      /-/-/-/-/-/ STYLE BELOW  /-/-/-/-/-/      -->
 <style>
 .show-movies {
-  margin: 0 5rem;
+  margin: 0;
+  background-image: url(../assets/Background_1.png);
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .search-form {
   display: flex;
@@ -106,15 +90,28 @@ export default {
 }
 #search-movie {
   width: 25rem;
-  background-color: #e9ecef8f;
+  background-color: #0000007e;
+  color: #ff0068;
+  border: 1px solid #ff0068;
+  border-radius: 20px;
+  box-shadow: 0 0 10px #ff0068;
+}
+#search-movie::placeholder {
+  color: #ff0068;
+  opacity: 1;
 }
 .movie-card {
   align-items: center;
   margin-top: 1rem;
-  border: 1px solid #00000057;
-  border-radius: 30px;
-  font-size: 20px;
+  font-size: 18px;
   height: 27rem;
+  color: #fff;
+  background: rgba(255, 0, 104, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   transition: all 500ms;
 }
 .movie-card:hover {

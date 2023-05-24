@@ -17,6 +17,7 @@
               class="card-carousel--card"
               v-for="movie in movies"
               :key="movie.id"
+              @click="openMovieDetails(movie)"
             >
               <img
                 class="carousel-img"
@@ -27,6 +28,10 @@
               />
               <div class="card-carousel--card--footer">
                 <h3 class="movie-title">{{ movie.title }}</h3>
+                <p>
+                  <i class="fa-solid fa-star"></i>
+                  {{ movie.vote_average }}
+                </p>
                 <!-- <p>{{ movie.overview }}</p>      //   PROPRIEDADE DA SINOPSE -->
               </div>
             </div>
@@ -53,6 +58,27 @@ export default {
     };
   },
   methods: {
+    async fetchMovies() {
+      try {
+        const response = await axios.get(
+          "https://api.themoviedb.org/3/movie/top_rated",
+          {
+            params: { language: "pt-BR", page: "1" },
+            headers: {
+              Authorization:
+                "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0OTgwZDdlODI2MTBjYmM1ZTZjZTIzNmYzYThkNTA4YyIsInN1YiI6IjY0NjdlYzQ4MzNhMzc2MDBlNjdhMDJmMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJ9.e3UIRvWV48uM21mm5tTewjH6aMTZ83AR5gB7hew_qGw"
+            }
+          }
+        );
+        this.movies = response.data.results;
+        console.log(this.movies);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    openMovieDetails(movie){
+      this.$emit('open-movie-details', movie);
+    },
     moveCarousel(direction) {
       if (direction === 1 && !this.atEndOfList) {
         this.currentOffset -= this.paginationFactor;
@@ -72,27 +98,7 @@ export default {
       return this.currentOffset === 0;
     }
   },
-  mounted() {
-    const options = {
-      method: "GET",
-      url: "https://api.themoviedb.org/3/movie/top_rated",
-      params: { language: "pt-BR", page: "1" },
-      headers: {
-        accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0OTgwZDdlODI2MTBjYmM1ZTZjZTIzNmYzYThkNTA4YyIsInN1YiI6IjY0NjdlYzQ4MzNhMzc2MDBlNjdhMDJmMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.KgzWulpj53NgRmKU8A1pQ_PZ-uQS30NvOIitm7I4B9E"
-      }
-    };
-
-    axios
-      .request(options)
-      .then(response => {
-        this.movies = response.data.results;
-        console.log(response.data);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+  mounted() {this.fetchMovies();
   }
 };
 </script>
@@ -100,14 +106,21 @@ export default {
 .carousel {
   margin: 20px 0 40px;
   color: #666a73;
+  background-color: #8905C9;
+  background-image: url(../assets/Background_2.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 70vh;
+  padding: 0;
+  margin: 0
 }
 
 .card-carousel-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 20px 0 40px;
-  color: #666a73;
+  padding: 2rem;
+  color: #ffffff;
 }
 
 .card-carousel {
@@ -116,7 +129,7 @@ export default {
   width: 80vw;
 }
 .carousel-img {
-  width: 400px;
+  width: 350px;
   position: relative;
 }
 
@@ -134,8 +147,8 @@ export default {
   width: 15px;
   height: 15px;
   padding: 10px;
-  border-top: 2px solid #42b883;
-  border-right: 2px solid #42b883;
+  border-top: 2px solid #000;
+  border-right: 2px solid #000;
   cursor: pointer;
   margin: 0 20px;
   transition: transform 150ms linear;
