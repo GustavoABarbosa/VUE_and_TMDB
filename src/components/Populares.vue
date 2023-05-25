@@ -18,6 +18,7 @@
               v-for="movie in movies"
               :key="movie.id"
               @click="openMovieDetails(movie)"
+              href="details"
             >
               <img
                 class="carousel-img"
@@ -52,7 +53,7 @@ export default {
       movies: [],
       windowSize: 4,
       currentOffset: 0,
-      paginationFactor: 450,
+      paginationFactor: 450
     };
   },
   methods: {
@@ -64,7 +65,7 @@ export default {
             params: { language: "pt-BR", page: "1" },
             headers: {
               Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0OTgwZDdlODI2MTBjYmM1ZTZjZTIzNmYzYThkNTA4YyIsInN1YiI6IjY0NjdlYzQ4MzNhMzc2MDBlNjdhMDJmMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJ9.e3UIRvWV48uM21mm5tTewjH6aMTZ83AR5gB7hew_qGw"
+                "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0OTgwZDdlODI2MTBjYmM1ZTZjZTIzNmYzYThkNTA4YyIsInN1YiI6IjY0NjdlYzQ4MzNhMzc2MDBlNjdhMDJmMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.KgzWulpj53NgRmKU8A1pQ_PZ-uQS30NvOIitm7I4B9E"
             }
           }
         );
@@ -81,8 +82,8 @@ export default {
         this.currentOffset += this.paginationFactor;
       }
     },
-    openMovieDetails(movie){
-      this.$emit('open-movie-details', movie)
+    openMovieDetails(movie) {
+      this.$emit("open-movie-details", movie);
     }
   },
   computed: {

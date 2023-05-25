@@ -31,9 +31,9 @@
     <b-modal id="login-modal" hide-footer title="Login">
       <div>
         <b-form>
-          <label for="form-input-name" required>E-mail:</label>
+          <label for="form-input-email" required>E-mail:</label>
           <b-form-input
-            id="form-input-name"
+            id="form-input-email"
             class="mb-2 mr-sm-2 mb-sm-0"
           ></b-form-input>
           <br />
@@ -53,9 +53,9 @@
             class="text-center mb-2 mr-sm-2 mb-sm-0"
             >Lembrar Login</b-form-checkbox
           ><br />
-          <a class="float-right mb-2 mr-sm-2 mb-sm-0" href=""
-            >Esqueci minha senha</a
-          >
+          <b-button id="forgot" v-b-modal.forgot-modal
+              >Esqueci minha senha</b-button
+            >
           <br />
           <br />
           <div class="text-center float-right">
@@ -84,9 +84,9 @@
             class="mb-2 mr-sm-2 mb-sm-0"
           ></b-form-input>
           <br />
-          <label for="form-input-name" required>Confirmar E-mail</label>
+          <label for="form-input-conf-email" required>Confirmar E-mail</label>
           <b-form-input
-            id="form-input-name"
+            id="form-input-conf-email"
             class="mb-2 mr-sm-2 mb-sm-0"
           ></b-form-input>
           <br />
@@ -118,6 +118,29 @@
         </b-form>
       </div>
     </b-modal>
+
+    <!--      /-/-/-/-/-/  FORGOT PASSWORD BELOW  /-/-/-/-/-/      -->
+    <b-modal id="forgot-modal" hide-footer title="Recuperar conta">
+      <div>
+        <b-form>
+          <label for="form-input-email" required>E-mail</label>
+          <b-form-input
+            class="mb-2 mr-sm-2 mb-sm-0"
+          ></b-form-input>
+          <br />
+          <label for="form-input-email" required>Confirmar E-mail</label>
+          <b-form-input
+            class="mb-2 mr-sm-2 mb-sm-0"
+          ></b-form-input>
+          <br />
+          <div class="text-center float-right">
+            <b-button variant="info"
+              >Enviar e-mail</b-button
+            >
+          </div>
+        </b-form>
+      </div>
+    </b-modal>
   </nav>
 </template>
 <!--      /-/-/-/-/-/ SCRIPT BELOW  /-/-/-/-/-/      -->
@@ -142,6 +165,9 @@
 .prim-btn:hover {
   background-color: #c3115a;
   border-color: #c3115a;
+}
+#forgot{
+  font-size: 16px;
 }
 #nav-collapse {
   margin: 0 8rem 0 8rem;

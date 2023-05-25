@@ -2,13 +2,13 @@
   <div id="app">
     <Navbar />
     <Search @open-movie-details="openMovieDetailsModal" />
-    <Populares @open-movie-details="openMovieDetailsModal" />
-    <Separador />
-    <MaisVotados @open-movie-details="openMovieDetailsModal" />
     <MovieDetails
     v-if="selectedMovie"
     :movie="selectedMovie"
     @close="closeMovieDetailsModal"/>
+    <Populares @open-movie-details="openMovieDetailsModal" />
+    <Separador />
+    <MaisVotados @open-movie-details="openMovieDetailsModal" />
     <Footer />
   </div>
 </template>
