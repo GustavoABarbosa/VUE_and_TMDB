@@ -8,7 +8,7 @@
       ></div>
       <div class="card-carousel">
         <div class="card-carousel--overflow-container">
-          <h1>Mais Votados!</h1>
+          <h3>Filmes similares</h3>
           <div
             class="card-carousel-cards"
             :style="{ transform: 'translateX(' + currentOffset + 'px)' }"
@@ -23,6 +23,7 @@
                     class="carousel-img"
                     :src="'http://image.tmdb.org/t/p/w500/' + movie.poster_path"
                     alt="Card Image"
+                    v-if="movie.poster_path"
                   />
                   <div class="card-carousel--card--footer">
                     <h3 class="movie-title">{{ movie.title }}</h3>
@@ -58,9 +59,13 @@ export default {
     };
   },
   methods: {
+    getMovieDetailsRoute(movieId) {
+      return `/details/${movieId}`;
+    },
     fetchMovies() {
+      const movieId = this.$route.params.movieId;
       api
-        .get("/movie/top_rated")
+        .get(`/movie/${movieId}/similar`)
         .then(response => {
           this.movies = response.data.results;
         })
@@ -74,9 +79,6 @@ export default {
       } else if (direction === -1 && !this.atHeadOfList) {
         this.currentOffset += this.paginationFactor;
       }
-    },
-    getMovieDetailsRoute(movieId) {
-      return `/details/${movieId}`;
     }
   },
   computed: {
@@ -99,22 +101,19 @@ export default {
 <style scoped>
 .carousel {
   margin: 20px 0 40px;
+  background-color: #2c3e50;
   color: #666a73;
-  background-color: #8905C9;
-  background-image: url(../assets/Background_2.png);
-  background-size: cover;
-  background-repeat: no-repeat;
   height: 70vh;
+  margin-bottom: 0;
   padding: 0;
-  margin: 0
 }
 
 .card-carousel-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
-  color: #ffffff;
+  padding: 2rem 0;
+  color: #ff0068;
 }
 
 .card-carousel {
@@ -123,7 +122,7 @@ export default {
   width: 80vw;
 }
 .carousel-img {
-  width: 350px;
+  width: 250px;
   position: relative;
 }
 
@@ -141,8 +140,8 @@ export default {
   width: 15px;
   height: 15px;
   padding: 10px;
-  border-top: 2px solid #000;
-  border-right: 2px solid #000;
+  border-top: 2px solid #ff0068;
+  border-right: 2px solid #ff0068;
   cursor: pointer;
   margin: 0 20px;
   transition: transform 150ms linear;
@@ -233,5 +232,8 @@ export default {
   margin: 0;
   font-size: 14px;
   user-select: none;
+}
+.fa-star{
+  fill: #ffffff !important
 }
 </style>

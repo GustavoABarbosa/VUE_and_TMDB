@@ -13,26 +13,27 @@
             class="card-carousel-cards"
             :style="{ transform: 'translateX(' + currentOffset + 'px)' }"
           >
-            <div
-              class="card-carousel--card"
-              v-for="movie in movies"
-              :key="movie.id"
-              @click="openMovieDetails(movie)"
-              href="details"
-            >
-              <img
-                class="carousel-img"
-                :src="'http://image.tmdb.org/t/p/w500/' + movie.poster_path"
-                alt="Card Image"
-              />
-              <div class="card-carousel--card--footer">
-                <h3 class="movie-title">{{ movie.title }}</h3>
-                <p class="rate">
-                  <i class="fa-solid fa-star"></i>
-                  {{ movie.vote_average }}
-                </p>
-              </div>
-            </div>
+            <template v-for="movie in movies">
+              <router-link :to="getMovieDetailsRoute(movie.id)" v-if="movie.id">
+                <div
+                  class="card-carousel--card"
+                  :key="movie.id"
+                >
+                  <img
+                    class="carousel-img"
+                    :src="'http://image.tmdb.org/t/p/w500/' + movie.poster_path"
+                    alt="Card Image"
+                  />
+                  <div class="card-carousel--card--footer">
+                    <h3 class="movie-title">{{ movie.title }}</h3>
+                    <p>
+                      <i class="star fa-solid fa-star"></i>
+                      {{ movie.vote_average }}
+                    </p>
+                  </div>
+                </div>
+              </router-link>
+            </template>
           </div>
         </div>
       </div>
@@ -46,7 +47,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import api from "../services/api";
 export default {
   data() {
     return {
@@ -57,23 +58,15 @@ export default {
     };
   },
   methods: {
-    async fetchMovies() {
-      try {
-        const response = await axios.get(
-          "https://api.themoviedb.org/3/movie/popular",
-          {
-            params: { language: "pt-BR", page: "1" },
-            headers: {
-              Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0OTgwZDdlODI2MTBjYmM1ZTZjZTIzNmYzYThkNTA4YyIsInN1YiI6IjY0NjdlYzQ4MzNhMzc2MDBlNjdhMDJmMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.KgzWulpj53NgRmKU8A1pQ_PZ-uQS30NvOIitm7I4B9E"
-            }
-          }
-        );
-        this.movies = response.data.results;
-        console.log(this.movies);
-      } catch (error) {
-        console.log(error);
-      }
+    fetchMovies() {
+      api
+        .get("/movie/popular")
+        .then(response => {
+          this.movies = response.data.results;
+        })
+        .catch(error => {
+          console.error(error);
+        });
     },
     moveCarousel(direction) {
       if (direction === 1 && !this.atEndOfList) {
@@ -82,8 +75,8 @@ export default {
         this.currentOffset += this.paginationFactor;
       }
     },
-    openMovieDetails(movie) {
-      this.$emit("open-movie-details", movie);
+    getMovieDetailsRoute(movieId) {
+      return `/details/${movieId}`;
     }
   },
   computed: {
@@ -237,5 +230,8 @@ export default {
   margin: 0;
   font-size: 14px;
   user-select: none;
+}
+.fa-star{
+  fill: #ffffff !important
 }
 </style>

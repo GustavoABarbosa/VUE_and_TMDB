@@ -13,27 +13,30 @@
             class="mb-2 mr-sm-2 mb-sm-0"
             type="text"
             v-model="query"
-            @keyup="getResult(query)"
+            @keyup="fetchMovies(query)"
           />
         </b-input-group>
       </b-form>
     </div>
     <b-container>
       <b-row>
-        <b-col
-          v-on:click="showInfo()"
-          class="movie-card d-flex flex-column m-2"
-          v-for="result in results"
-          :key="result.id"
-          @click="openMovieDetails(movie)"
-        >
-          <img
-            v-bind:src="'http://image.tmdb.org/t/p/w500/' + result.poster_path"
-            class="img-size"
-          />
-          <br />
-          <p class="text-center">{{ result.title }}</p>
-        </b-col>
+        <template v-for="movie in movies">
+          <router-link :to="getMovieDetailsRoute(movie.id)" v-if="movie.id">
+            <b-col
+              class="movie-card d-flex flex-column m-2"
+              :key="movie.id"
+            >
+              <img
+                v-bind:src="
+                  'http://image.tmdb.org/t/p/w500/' + movie.poster_path
+                "
+                class="img-size"
+              />
+              <br />
+              <p class="text-center">{{ movie.title }}</p>
+            </b-col>
+          </router-link>
+        </template>
       </b-row>
     </b-container>
   </div>
@@ -42,34 +45,30 @@
 <!--      /-/-/-/-/-/ SCRIPT BELOW  /-/-/-/-/-/      -->
 <script>
 import axios from "axios";
+import api from "../services/api";
 
 export default {
   name: "search",
   data() {
     return {
       query: "",
-      results: []
+      movies: []
     };
   },
   methods: {
-    getResult() {
-      axios
+    fetchMovies() {
+      api
         .get(
-          `https://api.themoviedb.org/3/search/movie?api_key=4980d7e82610cbc5e6ce236f3a8d508c&query=${this.query}`
-        )
-        .then(response => {
-          this.results = response.data.results;
+          `/search/movie?api_key=39aaf7294457b0eb8cbbc6d93bf7d7f6&query=${this.query}`
+        ).then(response => {
+          this.movies = response.data.results;
         })
         .catch(error => {
           console.error(error);
         });
     },
-    openMovieDetails(movie){
-      this.$emit('open-movie-details', movie);
-    },
-    showInfo(query) {
-      this.query = query;
-      this.getResult();
+    getMovieDetailsRoute(movieId) {
+      return `/details/${movieId}`;
     }
   }
 };
@@ -102,6 +101,7 @@ export default {
 }
 .movie-card {
   align-items: center;
+  width: 250px;
   margin-top: 1rem;
   font-size: 18px;
   height: 27rem;
