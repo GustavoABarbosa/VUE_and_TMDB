@@ -28,7 +28,7 @@
             >
               <img
                 v-bind:src="
-                  'http://image.tmdb.org/t/p/w500/' + movie.poster_path
+                  'http://image.tmdb.org/t/p/original/' + movie.poster_path
                 "
                 class="img-size"
               />

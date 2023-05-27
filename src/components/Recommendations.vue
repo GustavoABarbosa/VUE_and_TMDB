@@ -59,7 +59,7 @@ export default {
       movies: [],
       windowSize: 4,
       currentOffset: 0,
-      paginationFactor: 450
+      paginationFactor: 250
     };
   },
   methods: {

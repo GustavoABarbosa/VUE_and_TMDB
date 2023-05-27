@@ -2,9 +2,8 @@
   <div>
     <Search @open-movie-details="openMovieDetailsModal" />
     <Populares @open-movie-details="openMovieDetailsModal" />
-    <Separador />
     <MaisVotados @open-movie-details="openMovieDetailsModal" />
-    <Favoritos/>
+    <Favoritos v-if="!isEmptyTrue" />
     <MovieDetails
       v-if="selectedMovie"
       :movie="selectedMovie"
@@ -15,8 +14,9 @@
 <script>
 import Search from "../components/Search";
 import Populares from "../components/Populares.vue";
-import Separador from "../components/Separador.vue";
+import SeparadorBaixo from "../components/SeparadorBaixo.vue";
 import MaisVotados from "../components/MaisVotados.vue";
+import SeparadorCima from "../components/SeparadorCima.vue"
 import Favoritos from "../components/Favoritos.vue"
 import MovieDetails from "../components/MovieDetails.vue";
 
@@ -25,14 +25,16 @@ export default {
   components: {
     Search,
     Populares,
-    Separador,
+    SeparadorBaixo,
     MaisVotados,
+    SeparadorCima,
     Favoritos,
     MovieDetails
 },
   data() {
     return {
-      selectedMovie: null
+      selectedMovie: null,
+      isFavoritesEmpty: true
     };
   },
   methods: {
@@ -41,6 +43,7 @@ export default {
         .get("/movie/popular")
         .then(response => {
           this.movies = response.data.results;
+          this.isFavoritesEmpty = this.$store.state.favorites.length === 0;
         })
         .catch(error => {
           console.error(error);

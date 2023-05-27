@@ -15,13 +15,21 @@
         <b-row class="left-info text-center">
           <b-col
             ><h2 class="display-4">{{ movie.title }}</h2>
-            <button v-if="isInFavorites(movie)" disabled>
-              Já está nos Favoritos
+            <button
+              class="button-favorite"
+              :class="{
+                'button-remove': isInFavorites(movie),
+                'button-add': !isInFavorites(movie)
+              }"
+              @click="toggleFavorite(movie)"
+            >
+              {{
+                isInFavorites(movie)
+                  ? "Remover dos Favoritos"
+                  : "Adicionar aos Favoritos"
+              }}
             </button>
-            <button v-else @click="addToFavorites(movie)">
-              Adicionar aos Favoritos
-            </button></b-col
-          >
+          </b-col>
           <b-col class="right-info">
             <b-row>
               <b-col class="middle">
@@ -65,6 +73,7 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
   props: {
     movie: {
@@ -81,6 +90,15 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(["REMOVE_MOVIE_FROM_FAVORITES"]),
+    addToFavorites(movie) {
+      this.ADD_MOVIE_TO_FAVORITES(movie);
+    },
+    removeFromFavorites(movie) {
+      this.REMOVE_MOVIE_FROM_FAVORITES(movie.id);
+      const favorites = this$store.state.favorites;
+      localStorage.setItem("favorites", JSON.stringify(state.favorites));
+    },
     selectRating(rating) {
       this.selectedRating = rating;
       localStorage.setItem(`movieRating_${this.movieId}`, this.selectedRating);
@@ -96,6 +114,13 @@ export default {
     },
     isInFavorites(movie) {
       return this.$store.state.favorites.some(fav => fav.id === movie.id);
+    },
+    toggleFavorite(movie) {
+      if (this.isInFavorites(movie)) {
+        this.removeFromFavorites(movie);
+      } else {
+        this.addToFavorites(movie);
+      }
     }
   },
   watch: {
@@ -117,6 +142,36 @@ export default {
 #info-details {
   display: flex;
   flex-direction: column;
+}
+.button-add,
+.button-remove {
+  height: 45px;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 10px;
+  transition: all ease-in 300ms;
+  width: 30rem;
+  opacity: 0.5;
+}
+.button-add {
+  background: rgb(245, 0, 112);
+  background: linear-gradient(
+    54deg,
+    rgba(245, 0, 112, 1) 50%,
+    rgba(137, 4, 201, 1) 100%
+  );
+}
+.button-remove {
+  background: rgb(137, 4, 201);
+  background: linear-gradient(
+    54deg,
+    rgba(137, 4, 201, 1) 0%,
+    rgba(245, 0, 112, 1) 50%
+  );
+}
+.button-add:hover,
+.button-remove:hover {
+  opacity: 1;
 }
 .middle {
   display: flex;
@@ -147,9 +202,5 @@ export default {
 }
 .star-icon:hover {
   color: rgba(255, 216, 100, 0.562);
-}
-
-.selected-count {
-  font-weight: bold;
 }
 </style>
