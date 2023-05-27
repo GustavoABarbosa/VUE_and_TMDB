@@ -4,6 +4,7 @@
     <Populares @open-movie-details="openMovieDetailsModal" />
     <Separador />
     <MaisVotados @open-movie-details="openMovieDetailsModal" />
+    <Favoritos/>
     <MovieDetails
       v-if="selectedMovie"
       :movie="selectedMovie"
@@ -12,12 +13,11 @@
 </template>
 
 <script>
-import Populares from "../components/Populares.vue";
 import Search from "../components/Search";
-
-import MaisVotados from "../components/MaisVotados.vue";
+import Populares from "../components/Populares.vue";
 import Separador from "../components/Separador.vue";
-
+import MaisVotados from "../components/MaisVotados.vue";
+import Favoritos from "../components/Favoritos.vue"
 import MovieDetails from "../components/MovieDetails.vue";
 
 export default {
@@ -27,6 +27,7 @@ export default {
     Populares,
     Separador,
     MaisVotados,
+    Favoritos,
     MovieDetails
 },
   data() {
@@ -61,8 +62,9 @@ export default {
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+  color: #fff;
   background-color: #2c3e50;
+
 }
 html,
 body,

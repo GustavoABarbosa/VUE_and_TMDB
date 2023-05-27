@@ -1,50 +1,54 @@
 <template>
-  <section class="carousel">
-    <div class="card-carousel-wrapper">
-      <div
-        class="card-carousel--navleft"
-        @click="moveCarousel(-1)"
-        :disabled="atHeadOfList"
-      ></div>
-      <div class="card-carousel">
-        <div class="card-carousel--overflow-container">
-          <h3>Filmes similares</h3>
-          <div
-            class="card-carousel-cards"
-            :style="{ transform: 'translateX(' + currentOffset + 'px)' }"
-          >
-            <template v-for="movie in movies">
-              <router-link :to="getMovieDetailsRoute(movie.id)" v-if="movie.id">
-                <div
-                  class="card-carousel--card"
-                  :key="movie.id"
+  <div class="container">
+    <b-col class="carousel">
+      <div class="card-carousel-wrapper ">
+        <div
+          class="card-carousel--navleft"
+          @click="moveCarousel(-1)"
+          :disabled="atHeadOfList"
+        ></div>
+        <b-row class="card-carousel">
+          <div class="card-carousel--overflow-container">
+            <h3>Filmes similares</h3>
+            <div
+              class="card-carousel-cards"
+              :style="{ transform: 'translateX(' + currentOffset + 'px)' }"
+            >
+              <template v-for="movie in movies">
+                <router-link
+                  :to="getMovieDetailsRoute(movie.id)"
+                  v-if="movie.id"
                 >
-                  <img
-                    class="carousel-img"
-                    :src="'http://image.tmdb.org/t/p/w500/' + movie.poster_path"
-                    alt="Card Image"
-                    v-if="movie.poster_path"
-                  />
-                  <div class="card-carousel--card--footer">
-                    <h3 class="movie-title">{{ movie.title }}</h3>
-                    <p>
-                      <i class="star fa-solid fa-star"></i>
-                      {{ movie.vote_average }}
-                    </p>
+                  <div class="card-carousel--card" :key="movie.id">
+                    <img
+                      class="carousel-img"
+                      :src="
+                        'http://image.tmdb.org/t/p/w500/' + movie.poster_path
+                      "
+                      alt="Card Image"
+                      v-if="movie.poster_path"
+                    />
+                    <div class="card-carousel--card--footer">
+                      <h3 class="movie-title">{{ movie.title }}</h3>
+                      <p>
+                        <i class="star fa-solid fa-star"></i>
+                        {{ movie.vote_average }}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </router-link>
-            </template>
+                </router-link>
+              </template>
+            </div>
           </div>
-        </div>
+        </b-row>
+        <div
+          class="card-carousel--navright"
+          @click="moveCarousel(1)"
+          :disabled="atEndOfList"
+        ></div>
       </div>
-      <div
-        class="card-carousel--navright"
-        @click="moveCarousel(1)"
-        :disabled="atEndOfList"
-      ></div>
-    </div>
-  </section>
+    </b-col>
+  </div>
 </template>
 
 <script>
@@ -119,7 +123,7 @@ export default {
 .card-carousel {
   display: flex;
   justify-content: center;
-  width: 80vw;
+  width: 100%;
 }
 .carousel-img {
   width: 250px;
@@ -233,7 +237,7 @@ export default {
   font-size: 14px;
   user-select: none;
 }
-.fa-star{
-  fill: #ffffff !important
+.fa-star {
+  fill: #ffffff !important;
 }
 </style>

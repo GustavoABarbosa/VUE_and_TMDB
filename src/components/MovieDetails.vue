@@ -14,7 +14,13 @@
       <div id="info-details">
         <b-row class="left-info text-center">
           <b-col
-            ><h2 class="display-4">{{ movie.title }}</h2></b-col
+            ><h2 class="display-4">{{ movie.title }}</h2>
+            <button v-if="isInFavorites(movie)" disabled>
+              Já está nos Favoritos
+            </button>
+            <button v-else @click="addToFavorites(movie)">
+              Adicionar aos Favoritos
+            </button></b-col
           >
           <b-col class="right-info">
             <b-row>
@@ -29,12 +35,17 @@
                     v-for="rating in 5"
                     :key="rating"
                     @click="selectRating(rating)"
-                    :class="{ 'active': rating <= selectedRating }"
+                    :class="{ active: rating <= selectedRating }"
+                    class="star-icon"
                   >
-                    <i class="fas fa-star"></i>
+                    <b-icon
+                      class="star-icon mx-1"
+                      icon="star-fill"
+                      font-scale="1"
+                    ></b-icon>
                   </span>
                 </div>
-                <spam class="selected-count">Seu voto: {{ selectedRating }}</spam>
+                <spam class="text-center">Seu voto: {{ selectedRating }}</spam>
               </b-col>
               <b-col class="genres text-center">
                 <p>Gêneros:</p>
@@ -79,10 +90,16 @@ export default {
       if (storedRating) {
         this.selectedRating = parseInt(storedRating);
       }
+    },
+    addToFavorites(movie) {
+      this.$store.commit("ADD_MOVIE_TO_FAVORITES", movie);
+    },
+    isInFavorites(movie) {
+      return this.$store.state.favorites.some(fav => fav.id === movie.id);
     }
   },
   watch: {
-    movieId(){
+    movieId() {
       this.loadRating();
     }
   },
@@ -95,6 +112,7 @@ export default {
 <style>
 #movie-poster {
   width: 100%;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
 }
 #info-details {
   display: flex;
@@ -105,6 +123,11 @@ export default {
   flex-direction: column;
   justify-content: center;
 }
+.star-icon {
+  display: inline-block;
+  color: rgba(255, 255, 255, 0.3);
+}
+
 .star-rating {
   display: inline-block;
 }
@@ -113,17 +136,20 @@ export default {
   cursor: pointer;
 }
 
-.star-rating i {
-  fill: transparent;
+.star-rating span i {
+  color: transparent;
   font-size: 1.5rem;
 }
 
-.star-rating span i.active {
-  fill: #ffc107;
+.star-rating span.active .star-icon {
+  color: #ffc107 !important;
+  fill: #ffc107 !important;
+}
+.star-icon:hover {
+  color: rgba(255, 216, 100, 0.562);
 }
 
 .selected-count {
-  margin-left: 10px;
   font-weight: bold;
 }
 </style>

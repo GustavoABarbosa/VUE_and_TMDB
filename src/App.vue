@@ -14,7 +14,7 @@ export default {
   name: "App",
   components: {
     Navbar,
-    Footer
+    Footer,
   }
 };
 </script>
@@ -34,5 +34,6 @@ body,
   padding: 0;
   margin: 0;
   background-color: #2c3e50;;
+  color: #fff
 }
 </style>
