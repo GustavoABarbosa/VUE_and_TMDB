@@ -1,4 +1,4 @@
-## Portfolio
+## Huggy Movies
 
 <p align='center'>
 Este é um projeto FrontEnd, o qual faz acesso á API TheMoviesDataBan
@@ -30,7 +30,6 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 🛠 Instalando
 
->Ainda em construção!
 ``` bash
 # install dependencies
 npm install
@@ -45,7 +44,6 @@ npm run build
 npm run build --report
 ```
 
->For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
-<br><br>
+<br>
 <p align="center">
 Obrigado pelo acesso!
