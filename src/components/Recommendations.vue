@@ -59,7 +59,7 @@ export default {
       movies: [],
       windowSize: 4,
       currentOffset: 0,
-      paginationFactor: 250
+      paginationFactor: 275
     };
   },
   methods: {
@@ -126,7 +126,7 @@ export default {
   width: 100%;
 }
 .carousel-img {
-  width: 250px;
+  width: 255px;
   position: relative;
 }
 

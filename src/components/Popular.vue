@@ -1,6 +1,7 @@
 <template>
   <section>
     <carousel :title="'Filmes populares'" :movies="movies" />
+  
   </section>
 </template>
 
