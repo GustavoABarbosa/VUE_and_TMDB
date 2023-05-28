@@ -1,9 +1,9 @@
 <template>
   <div>
     <Search @open-movie-details="openMovieDetailsModal" />
-    <Populares @open-movie-details="openMovieDetailsModal" />
-    <MaisVotados @open-movie-details="openMovieDetailsModal" />
-    <Favoritos v-if="!isEmptyTrue" />
+    <Popular @open-movie-details="openMovieDetailsModal" />
+    <TopRated @open-movie-details="openMovieDetailsModal" />
+    <Favorites v-if="hasFavorites" />
     <MovieDetails
       v-if="selectedMovie"
       :movie="selectedMovie"
@@ -13,29 +13,29 @@
 
 <script>
 import Search from "../components/Search";
-import Populares from "../components/Populares.vue";
-import SeparadorBaixo from "../components/SeparadorBaixo.vue";
-import MaisVotados from "../components/MaisVotados.vue";
-import SeparadorCima from "../components/SeparadorCima.vue"
-import Favoritos from "../components/Favoritos.vue"
+import Popular from "../components/Popular.vue";
+import TopRated from "../components/TopRated.vue";
+import Favorites from "../components/Favorites.vue"
 import MovieDetails from "../components/MovieDetails.vue";
 
 export default {
-  name: "App",
+  name: "Home",
   components: {
     Search,
-    Populares,
-    SeparadorBaixo,
-    MaisVotados,
-    SeparadorCima,
-    Favoritos,
+    Popular,
+    TopRated,
+    Favorites,
     MovieDetails
 },
   data() {
     return {
       selectedMovie: null,
-      isFavoritesEmpty: true
     };
+  },
+  computed: {
+    hasFavorites(){
+      return this.$store.state.favorites.length > 0;
+    }
   },
   methods: {
     fetchMovies() {

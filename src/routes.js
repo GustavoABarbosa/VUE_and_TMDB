@@ -4,7 +4,6 @@ import VueRouter from 'vue-router';
 
 import Home from './views/Home.vue';
 
-const NotFound = { template: '<p>Page not found</p>' }
 
 import Details from './views/Details.vue'
 

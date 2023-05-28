@@ -40,7 +40,7 @@
         :disabled="atEndOfList"
       ></div>
     </div>
-   
+
   </section>
 </template>
 
@@ -66,7 +66,7 @@ export default {
   computed: {
     atEndOfList() {
       return (
-        this.currentOffset <=
+        this.currentOffset <
         this.paginationFactor * -1 * (this.movies.length - this.windowSize)
       );
     },
@@ -125,8 +125,8 @@ export default {
   width: 15px;
   height: 15px;
   padding: 10px;
-  border-top: 2px solid #000;
-  border-right: 2px solid #000;
+  border-top: 2px solid #ffffff;
+  border-right: 2px solid #ffffff;
   cursor: pointer;
   margin: 0 20px;
   transition: transform 150ms linear;

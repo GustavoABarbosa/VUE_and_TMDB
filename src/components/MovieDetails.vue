@@ -30,7 +30,7 @@
               }}
             </button>
           </b-col>
-          <b-col class="right-info">
+          <b-col class="right-info mt-3">
             <b-row>
               <b-col class="middle">
                 <!-- Detalhes cetrais-->
@@ -39,7 +39,7 @@
                 <!-- Avaliação com LocalStorage-->
                 <p>Avaliar filme:</p>
                 <div class="star-rating">
-                  <span
+                  <div
                     v-for="rating in 5"
                     :key="rating"
                     @click="selectRating(rating)"
@@ -51,9 +51,9 @@
                       icon="star-fill"
                       font-scale="1"
                     ></b-icon>
-                  </span>
+                  </div>
                 </div>
-                <spam class="text-center">Seu voto: {{ selectedRating }}</spam>
+                <p class="text-center">Seu voto: {{ selectedRating }}</p>
               </b-col>
               <b-col class="genres text-center">
                 <p>Gêneros:</p>
@@ -143,6 +143,11 @@ export default {
   display: flex;
   flex-direction: column;
 }
+.left-info{
+  display: flex;
+  align-items: center;
+  margin: 0
+}
 .button-add,
 .button-remove {
   height: 45px;
@@ -150,8 +155,7 @@ export default {
   font-weight: 700;
   border-radius: 10px;
   transition: all ease-in 300ms;
-  width: 30rem;
-  opacity: 0.5;
+  width: 25rem;
 }
 .button-add {
   background: rgb(245, 0, 112);
@@ -160,6 +164,11 @@ export default {
     rgba(245, 0, 112, 1) 50%,
     rgba(137, 4, 201, 1) 100%
   );
+  opacity: 1
+}
+.button-add:hover{
+  transform: scale(1.05);
+  box-shadow: 0 0 50px rgba(245, 0, 112, 0.6);
 }
 .button-remove {
   background: rgb(137, 4, 201);
@@ -168,8 +177,8 @@ export default {
     rgba(137, 4, 201, 1) 0%,
     rgba(245, 0, 112, 1) 50%
   );
+  opacity: 0.5;
 }
-.button-add:hover,
 .button-remove:hover {
   opacity: 1;
 }
@@ -187,16 +196,16 @@ export default {
   display: inline-block;
 }
 
-.star-rating span {
+.star-rating div {
   cursor: pointer;
 }
 
-.star-rating span i {
+.star-rating div i {
   color: transparent;
   font-size: 1.5rem;
 }
 
-.star-rating span.active .star-icon {
+.star-rating div.active .star-icon {
   color: #ffc107 !important;
   fill: #ffc107 !important;
 }
