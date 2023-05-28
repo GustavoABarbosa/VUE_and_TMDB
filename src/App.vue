@@ -36,4 +36,18 @@ body,
   background-color: #2c3e50;;
   color: #fff
 }
+
+::-webkit-scrollbar{
+    width: 15px;
+}
+::-webkit-scrollbar-track{
+    border-radius: 0px;
+    background-color: #2c3e50;
+}
+::-webkit-scrollbar-thumb{
+    background: linear-gradient(0deg, #4f2c50 0%, #aa00ff 50%, #432c50 100%);
+    border-radius: 0px;
+}
+
+
 </style>
