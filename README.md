@@ -66,7 +66,9 @@ O projeto foi estruturado da seguinte forma:
 O projeto foi hospedado na vercel, [clique aqui para visitar](https://vue-and-tmdb.vercel.app).<br>
 
  ```
- Note que o projeto foi feito visando a visualização em desktop, por isso não possui uma responsividade adequada ás telas menores (nada que uma possível futura atualização utilizando @media não resolva).
+ - Note que o projeto foi feito visando a visualização em desktop, por isso não possui uma responsividade adequada ás telas menores (nada que uma possível futura atualização utilizando @media não resolva).
+- Note também que o Vercel acabou não puxando algumas estilizações, por isso podem haver inconsis-
+tências na renderização do deploy, para melhor experiência, siga os passos da seção "Instalando".
 ```
 ## Considerações finais
 
