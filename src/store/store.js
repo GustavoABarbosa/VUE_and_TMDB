@@ -15,7 +15,6 @@ export default new Vuex.Store({
     REMOVE_MOVIE_FROM_FAVORITES(state, movieId) {
       state.favorites = state.favorites.filter(fav => fav.id !== movieId);
 
-      // Atualizar o LocalStorage com a lista atualizada de favoritos
       localStorage.setItem("favorites", JSON.stringify(state.favorites));
     }
   }
