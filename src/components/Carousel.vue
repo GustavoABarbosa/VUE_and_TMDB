@@ -13,7 +13,7 @@
             class="carousel-cards"
             :style="{ transform: 'translateX(' + currentOffset + 'px)' }"
           >
-            <template v-for="movie in movies">
+            <template v-for="movie in movies" v-if="movie.poster_path">
               <router-link :to="getMovieDetailsRoute(movie.id)">
                 <div class="cards-carousel" :key="movie.id">
                   <img

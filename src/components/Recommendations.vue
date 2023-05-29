@@ -57,7 +57,7 @@ export default {
   data() {
     return {
       movies: [],
-      windowSize: 4,
+      windowSize: 7.5,
       currentOffset: 0,
       paginationFactor: 275
     };
