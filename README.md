@@ -22,7 +22,7 @@ O projeto foi desenvolvido com as seguintes tecnologias:
 - VueJS
 - Bootstrap 4
 - TMDB API
-
+<br>
 
 ## Instalando
 
@@ -38,6 +38,7 @@ aconteça, atualize-a utilizando sua chave (que você encontra sua chave nas con
 conta na plataforma da TMDB) no arquivo localizado em (./src/services/api.js), na linha 8, onde se
 encontra "Authorization".
 ```
+<br>
 
 ## Funcionalidades
 
@@ -51,6 +52,8 @@ Este projeto tem como objetivo uma micro-aplicação web para busca, exibição 
 - Avaliação do filme de 0 a 5 estrelas, salvando o dado em LocalStorage (✔)
 - Adicionar um filme aos favoritos (✔)
 
+<br>
+
 ## Estruturação
 
 O projeto foi estruturado da seguinte forma:
@@ -60,6 +63,7 @@ O projeto foi estruturado da seguinte forma:
 - `store`: Contém o funcionamento do Vuex, o qual armazena o estado da aplicação.<br>
 - `views`: Contém as páginas do aplicativo. O arquivo `Home.vue` é a página principal, a qual contém os componentes principais. Já o arquivo `MovieDetails.vue`, como o próprio nome diz por si só, é a renderização dos detalhes do filme escolhido.
 <br>
+<br>
 
 ## Deploy
 
@@ -67,13 +71,13 @@ O projeto foi hospedado na vercel, [clique aqui para visitar](https://vue-and-tm
 
  ```
  - Note que o projeto foi feito visando a visualização em desktop, por isso não possui uma responsividade adequada ás telas menores (nada que uma possível futura atualização utilizando @media não resolva).
-- Note também que o Vercel acabou não puxando algumas estilizações, por isso podem haver inconsis-
-tências na renderização do deploy, para melhor experiência, siga os passos da seção "Instalando".
+- Note também que o Vercel acabou não puxando algumas estilizações, por isso podem haver inconsistências na renderização do deploy, para melhor experiência, siga os passos da seção "Instalando".
 ```
+<br>
+
 ## Considerações finais
 
 Este projeto foi criado como parte de um desafio para vaga de frontend júnior, o qual consegui cumprir todas as demandas do teste, e inclusive dar toque da indentidade visual do site oficial da empresa.
 
 Tendo em vista que nunca tive contato com Vue, fiquei muito orgulhoso do resultado atingido.
 
-<hr>
