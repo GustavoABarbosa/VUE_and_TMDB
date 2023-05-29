@@ -2,22 +2,15 @@
 
 <p>
 Este é um repositório para o projeto Huggy Movies, que consiste no desenvolvimento de uma micro-aplicação web para a busca, exibição de detalhes, sugestão e avaliação de filmes, utilizando um banco de dados importado da API TMDB (The Movie Databank);
+<br><br><br>
 
 <p align="center">
-  <a href="#-tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-Instalando">Instalando</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-Funcionalidades">Funcionalidades</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-Estruturação">Estruturação</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-Deploy">Deploy</a>
-
-
-<br>
-
-<p align="center">
-  <img alt="projeto Portfolio" src="./src/assets/Captura_Home.png" width="48%">
-  <img alt="projeto Portfolio" src="./src/assets/Captura_Details.png" width="48%">
+  <img alt="projeto Portfolio" src="./src/assets/Captura_Home.png" width="80%">
+  <img alt="projeto Portfolio" src="./src/assets/Captura_Details.png" width="80%">
 
 </p>
+<br><br><br>
+
 
 ## Tecnologias
 
